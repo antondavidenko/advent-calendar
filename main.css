@@ -1,0 +1,34 @@
+canvas { 
+	padding: 0px;
+}
+
+body {
+	background-color: #ffffff;
+	margin: 0px;
+	padding: 0;
+}
+
+.center {
+	margin: auto;
+	width: 1185px;
+	padding: 0px;
+}
+
+.center_mob {
+	width: 100%;
+	height: auto;
+}
+
+#pageFooter_dsc {
+	background-image: url("./imghtml/footerbg_dsc.png");
+}
+
+#pixiJS {
+	max-width: 100%;
+	overflow: hidden;
+}
+
+body > div {
+	max-width: 100%;
+	overflow: hidden;
+}
