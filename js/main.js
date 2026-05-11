@@ -18,8 +18,23 @@ function main()
 
   var GET = [];
     createGET();
-    var brand = (GET['brand'] === undefined)?'bn':GET['brand'];
-    var day = (GET['day'] === undefined)?'7':GET['day'];
+    var brand = GET['brand'];
+    var day = GET['day'];
+
+    if (!brand || !day) {
+        document.getElementById("demo_content").style.display = "none";
+        document.getElementById("selectors").style.display = "flex";
+        
+        // Add event listener to showButton
+        document.getElementById('showButton').addEventListener('click', function() {
+            var selectedBrand = document.getElementById('brandSelector').value;
+            var selectedDay = document.getElementById('daySelector').value;
+            var newUrl = window.location.origin + window.location.pathname + '?brand=' + encodeURIComponent(selectedBrand) + '&day=' + encodeURIComponent(selectedDay);
+            window.location.href = newUrl;
+        });
+        
+        return;
+    }
 
     //console.log("BRAND = "+brand);
     //console.log("DAY = "+day);
@@ -30,8 +45,10 @@ function main()
 
     if (brand === 'ch') { config = new ConfigCH(); } else
     if (brand === 'fb') { config = new ConfigFB(); } else
-    if (brand === 'fc') { config = new ConfigFC(); } else {
-        config = new ConfigBN();
+    if (brand === 'fc') { config = new ConfigFC(); } else
+    if (brand === 'bn') { config = new ConfigBN(); } else {
+      console.error("Unknown brand: "+brand);
+       return;
     }
     config.day = day;
 
@@ -119,12 +136,12 @@ function main()
 
     function resizeMobView(app, windowW, windowH)
     {
-        console.log(windowW, windowH);
+        // console.log(windowW, windowH);
         app.renderer.view.style.height = windowH+"px";
         var multiplayer2 = windowH/appH;
         app.renderer.view.width = windowW/multiplayer2/* - 23/multiplayer2*/;
 
-        console.log(app.renderer.view.width, 'vs', windowW);
+        // console.log(app.renderer.view.width, 'vs', windowW);
 
         /*var delta = Math.round((windowW-config.appWcentredMob*multiplayer2)/2);
         view.setupScaleDelta(delta);*/
